@@ -7,29 +7,42 @@ from .models import *
 from django.db.models import F, Sum
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib import messages
 # Create your views here.
 def index(request):
     return render(request, 'core/index.html')
 
 def ordenlista(request):
     ordenes = Orden.objects.all()
-    return render(request, 'core/ordenlista.html',{'ordenes': ordenes})
+    productos = Producto.objects.all()
+    return render(request, 'core/ordenlista.html',{'ordenes': ordenes,'productos': productos})
 
 
-def login(request):
+from django.shortcuts import redirect
+
+def login_views(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            nombreUsuario = form.cleaned_data.get('usuario')
-            contrasenaUsuario = form.cleaned_data.get('contraseña')
-            user = authenticate(usuario=nombreUsuario, contraseña=contrasenaUsuario)
-            if user is not None:
-                login(request, user)
-                return redirect('ruta_despues_de_iniciar_sesion')  # Redirige a una página específica después de iniciar sesión
-    else:
-        form = AuthenticationForm()
-    
-    return render(request, 'nombre_de_tu_template.html', {'form': form})
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Autenticar al usuario
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            # Contraseña válida, iniciar sesión
+            login(request, user)
+            return redirect('index')  # Redirige al usuario a la página de inicio
+        else:
+            # Contraseña incorrecta, mostrar mensaje de error
+            messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
+            return redirect('login')  # Redirige de nuevo al formulario de inicio de sesión
+
+    return render(request, 'core/login.html')
+
 
 def orden(request):
     

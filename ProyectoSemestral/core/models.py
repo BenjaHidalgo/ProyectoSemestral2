@@ -1,5 +1,6 @@
 from django.db import models 
 from django.core.validators import MinValueValidator
+from django.contrib.auth.hashers import check_password
     
 class Producto(models.Model):
     codigo_producto = models.CharField(max_length=200)
