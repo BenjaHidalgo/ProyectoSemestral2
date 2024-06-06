@@ -13,7 +13,8 @@ def index(request):
 
 def ordenlista(request):
     ordenes = Orden.objects.all()
-    return render(request, 'core/ordenlista.html',{'ordenes': ordenes})
+    productos = Producto.objects.all()
+    return render(request, 'core/ordenlista.html',{'ordenes': ordenes,'productos': productos})
 
 
 def login(request):

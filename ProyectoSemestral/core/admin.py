@@ -7,3 +7,4 @@ from .models import *
 
 admin.site.register(Orden)
 admin.site.register(Producto)
+admin.site.register(Usuario)
