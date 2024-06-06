@@ -56,16 +56,17 @@ def orden(request):
             # Obtener los productos asociados a la orden
             productos_orden = orden.productos.all()
             
-            subtotal = 0
+            
             
             # Calcular el subtotal sumando el precio total de cada producto
-            for producto in productos_orden:
-                subtotal += producto.precio_unitario * producto.cantidad
+            subtotal = sum(producto.precio_unitario * producto.cantidad for producto in productos_orden)
             
             # Calcular el IVA y el total
             iva = subtotal * 0.19
             total = subtotal + iva
 
+
+            orden.subtotal = subtotal
             orden.iva = iva
             orden.total = total
 
@@ -82,9 +83,10 @@ def orden(request):
 
     aux = {
         'form': formulario_orden,
-        'msj': ''
+        'productos': 'productos'
     }
     return render(request, 'core/orden.html', aux)
+
 
 
 
