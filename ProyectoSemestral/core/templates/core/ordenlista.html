@@ -4,61 +4,61 @@
 {% block title %}Lista de Órdenes{% endblock %}
 
 {% block contenido %}
-<h1>aaaaaaaaa</h1>
-
 <h1>Lista de Órdenes</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Número de Orden</th>
-            <th>Fecha de Orden</th>
-            <th>RUT Cliente</th>
-            <th>Nombre/Razón Social</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th>Cod. Producto</th>
-            <th>Precio unitario</th>
-            <th>Productos</th>
-            <th>Cantidad</th>
-            <th>Tipo de Servicio</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for orden in ordenes %}
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
-                <td>{{ orden.numero_orden }}</td>
-                <td>{{ orden.fecha_orden }}</td>
-                <td>{{ orden.rut_cliente }}</td>
-                <td>{{ orden.nombre_razon_social }}</td>
-                <td>{{ orden.direccion }}</td>
-                <td>{{ orden.telefono }}</td>
-                <td>{{ orden.correo }}</td>
-                <td>
-                    {% for producto in orden.productos.all %}
-                        {{ producto.codigo_producto }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                </td>
-                <td>
-                    {% for producto in orden.productos.all %}
-                        {{ producto.precio_unitario }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                </td>
-                <td>
-                    {% for producto in orden.productos.all %}
-                        {{ producto.nombre_producto }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                </td>
-                <td>
-                    {% for producto in orden.productos.all %}
-                        {{ producto.cantidad }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                </td>
-                <td>{{ orden.tipo_servicio }}</td>
+                <th scope="col">Número de Orden</th>
+                <th scope="col">Fecha de Orden</th>
+                <th scope="col">RUT Cliente</th>
+                <th scope="col">Nombre/Razón Social</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Cod. Producto</th>
+                <th scope="col">Precio unitario</th>
+                <th scope="col">Productos</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Tipo de Servicio</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for orden in ordenes %}
+                <tr>
+                    <td>{{ orden.numero_orden }}</td>
+                    <td>{{ orden.fecha_orden }}</td>
+                    <td>{{ orden.rut_cliente }}</td>
+                    <td>{{ orden.nombre_razon_social }}</td>
+                    <td>{{ orden.direccion }}</td>
+                    <td>{{ orden.telefono }}</td>
+                    <td>{{ orden.correo }}</td>
+                    <td>
+                        {% for producto in orden.productos.all %}
+                            {{ producto.codigo_producto }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for producto in orden.productos.all %}
+                            {{ producto.precio_unitario }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for producto in orden.productos.all %}
+                            {{ producto.nombre_producto }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for producto in orden.productos.all %}
+                            {{ producto.cantidad }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ orden.tipo_servicio }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
 
 {% block css %}
@@ -75,27 +75,29 @@
 
     table {
         width: 100%;
-        border-collapse: collapse;
         margin-bottom: 20px;
     }
 
-    th,
-    td {
-        padding: 10px;
+    th, td {
+        padding: 8px;
         text-align: left;
-        border-bottom: 1px solid #ddd;
     }
 
     th {
-        background-color: #f2f2f2;
+        background-color: #343a40;
+        color: white;
     }
 
     tr:nth-child(even) {
-        background-color: #f9f9f9;
+        background-color: #f8f9fa;
     }
 
     tr:hover {
-        background-color: #f1f1f1;
+        background-color: #e9ecef;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
     }
 </style>
 {% endblock %}
