@@ -4,8 +4,8 @@ from django.core.validators import MinValueValidator
 class Producto(models.Model):
     codigo_producto = models.CharField(max_length=200)
     nombre_producto = models.CharField(max_length=200)
-    cantidad = models.IntegerField(validators=[MinValueValidator(1)])
-    precio_unitario = models.IntegerField(validators=[MinValueValidator(1)])
+    cantidad = models.PositiveIntegerField()
+    precio_unitario = models.PositiveIntegerField()
 
     def __str__(self):
         return self.nombre_producto

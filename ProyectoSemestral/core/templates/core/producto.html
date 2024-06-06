@@ -48,20 +48,13 @@
         <form method="post">
             {% csrf_token %}
             <table>
-                {{ form }}
-            </table>
-            <table>
                 {{ form2 }}
+                
             </table>
-            <table>
-                {{ form3 }}
-            </table>
-            <table>
-                {{ form4}}
-            </table>
+            
 
 
-            <button type="submit" class="btn btn-primary mt-3">Crear Orden</button>
+            <button type="submit" class="btn btn-primary mt-3">Crear Producto</button>
         </form>
         <a href="{% url 'orden' %}" class="btn btn-secondary mt-3">Volver a la orden de compra</a>
 
